@@ -21,5 +21,11 @@ void main() {
   // );
   // department.session = "";
 
-  Ami().landUse();
+  // Ami().landUse();
+  confirmOrder(name: "Burger", id: 5352632, qnty: 2);
+}
+
+void confirmOrder({required String name, required int id, required int qnty}) {
+  print("Your Order id: $id");
+  print("Your $qnty $name Order is confirmed");
 }
