@@ -1,4 +1,3 @@
-import 'OOP/inheritance.dart';
 import 'OOP/product.dart';
 
 Future<void> main() async {
@@ -37,7 +36,7 @@ Future<void> main() async {
 
   // print(name);
 
- // addProduct();
+  // addProduct();
   divide(10, 0);
 }
 
@@ -72,5 +71,3 @@ void divide(int a, int b) {
     print('Finished');
   }
 }
-
-
