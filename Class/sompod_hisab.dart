@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Dadu {
   int land = 10;
   void landUse() {
@@ -16,9 +14,7 @@ class Baba extends Dadu {
 
 class Ami extends Baba {
   int land = Baba().land + Dadu().land;
- void landUse() {
+  void landUse() {
     print("Tmr Land Ache  $land");
   }
 }
-
-
