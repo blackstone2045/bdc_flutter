@@ -44,14 +44,14 @@ class HomePage extends StatelessWidget {
                     image: AssetImage('assets/images/couples.jpg'),
                     fit: BoxFit.cover,
                   ),
-                  gradient: LinearGradient(
-                    begin: AlignmentGeometry.bottomEnd,
-                    end: AlignmentGeometry.topStart,
-                    colors: [
-                      Color.fromARGB(255, 116, 51, 51),
-                      Color.fromARGB(255, 255, 255, 255),
-                    ],
-                  ),
+                  // gradient: LinearGradient(
+                  //   begin: AlignmentGeometry.bottomEnd,
+                  //   end: AlignmentGeometry.topStart,
+                  //   colors: [
+                  //     Color.fromARGB(178, 15, 0, 0),
+                  //     Color.fromARGB(139, 255, 255, 255),
+                  //   ],
+                  // ),
                 ),
                 child: Container(
                   decoration: BoxDecoration(
@@ -59,8 +59,8 @@ class HomePage extends StatelessWidget {
                       begin: AlignmentGeometry.bottomEnd,
                       end: AlignmentGeometry.topStart,
                       colors: [
-                        const Color.fromARGB(190, 0, 0, 0),
-                        const Color.fromARGB(153, 255, 255, 255),
+                        const Color.fromARGB(255, 0, 0, 0),
+                        const Color.fromARGB(75, 255, 255, 255),
                       ],
                     ),
                   ),
