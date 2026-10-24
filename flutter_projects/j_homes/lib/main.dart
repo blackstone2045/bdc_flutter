@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:j_homes/sections/how_works.dart';
 
 void main() {
   runApp(const JHomesApp());
@@ -36,89 +38,115 @@ class HomePage extends StatelessWidget {
         body: ListView(
           children: [
             SafeArea(
-              child: Container(
-                height: 907,
-                width: 375,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/couples.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                  // gradient: LinearGradient(
-                  //   begin: AlignmentGeometry.bottomEnd,
-                  //   end: AlignmentGeometry.topStart,
-                  //   colors: [
-                  //     Color.fromARGB(178, 15, 0, 0),
-                  //     Color.fromARGB(139, 255, 255, 255),
-                  //   ],
-                  // ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: AlignmentGeometry.bottomEnd,
-                      end: AlignmentGeometry.topStart,
-                      colors: [
-                        const Color.fromARGB(255, 0, 0, 0),
-                        const Color.fromARGB(75, 255, 255, 255),
+              child: Column(
+                children: [
+                  HowWorks(),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white24, width: 1),
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text(
+                            "Featured Open Rentals",
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.white24, width: 1),
+                          ),
+                          child: Column(
+                            children: [
+                              // cover image
+                              Container(
+                                height: 300,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(13),
+                                  border: Border.all(
+                                    color: Colors.white24,
+                                    width: 3,
+                                  ),
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                      "https://i.ibb.co.com/N6G0KWSD/fba1e577cb6e4afe22291acb687276899f8f68a6-1.jpg",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Image(
+                                    image: AssetImage(
+                                      "assets/icons/map-pin-5-line.png",
+                                    ),
+                                  ),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    "New York, United States",
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 15),
+                              Text(
+                                "A fully furnished studio with modern decor, a compact kitchen, and large windows.",
+                                style: GoogleFonts.onest(
+                                  textStyle: TextStyle(
+                                    color: Colors.blueGrey,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 15),
+                              Row(
+                                spacing: 18,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "March 2025",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  CircleAvatar(
+                                    backgroundColor: Colors.teal,
+                                    radius: 5,
+                                  ),
+                                  Text(
+                                    "₦ 1,200/ month",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      _worksContainer(
-                        context,
-                        sl: "01 ",
-                        text: "—Register and Verify your Identity for a Safer Experience",
-                      ),
-                      _worksContainer(
-                        context,
-                        sl: "02 ",
-                        text: "—Create New Rental or Onboard Your Ongoing Rental Agreement",
-                      ),
-                      _worksContainer(
-                        context,
-                        sl: "03 ",
-                        text: "—Start Connecting the Power of Collaboration",
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container _worksContainer(BuildContext context, {String? sl, String? text}) {
-    return Container(
-      margin: EdgeInsets.all(13),
-      padding: EdgeInsets.all(10),
-      height: 200,
-      width: 400,
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(75, 255, 255, 255),
-        //backgroundBlendMode: BlendMode.clear,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: RichText(
-        text: TextSpan(
-          text: sl,
-          style: TextStyle(
-            color: Colors.teal,
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-          children: <TextSpan>[
-            TextSpan(
-              text: text,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 24,
+                ],
               ),
             ),
           ],
