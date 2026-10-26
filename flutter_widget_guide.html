@@ -1,0 +1,2606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter Widgets Teaching Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #0175C2, #00B4D8); color: white; padding: 40px; text-align: center; border-radius: 10px; margin-bottom: 30px; }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header p { font-size: 1.2em; opacity: 0.9; }
+        .section { background: white; margin-bottom: 30px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .section-header { background: linear-gradient(135deg, #0175C2, #00B4D8); color: white; padding: 20px 30px; }
+        .section-header h2 { font-size: 1.5em; margin-bottom: 5px; }
+        .section-header p { opacity: 0.9; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 15px; font-size: 0.8em; font-weight: bold; margin-top: 5px; }
+        .badge-beginner { background: #d4edda; color: #155724; }
+        .badge-intermediate { background: #fff3cd; color: #856404; }
+        .section-content { padding: 25px 30px; }
+        .description { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #28a745; }
+        .description h3 { color: #28a745; margin-bottom: 8px; font-size: 1.1em; }
+        .design-output { background: #2d2d2d; color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; overflow-x: auto; }
+        .design-output h4 { margin-bottom: 15px; color: #00B4D8; }
+        .design-output pre { font-family: 'Consolas', monospace; font-size: 13px; line-height: 1.4; color: #d4d4d4; }
+        .code-block { background: #1e1e1e; padding: 20px; border-radius: 8px; margin-bottom: 20px; overflow-x: auto; }
+        .code-block h4 { color: #fff; margin-bottom: 15px; }
+        .code-block pre { color: #d4d4d4; font-family: 'Consolas', monospace; font-size: 13px; line-height: 1.5; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #0175C2; color: white; }
+        tr:hover { background: #f5f5f5; }
+        .practice-box { background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 20px; margin-top: 20px; }
+        .practice-box h3 { color: #856404; margin-bottom: 10px; }
+        .practice-box ol { margin-left: 20px; }
+        .practice-box li { margin-bottom: 8px; }
+        .tip-box { background: #d1ecf1; border-left: 4px solid #0c5460; padding: 15px; border-radius: 5px; margin: 15px 0; }
+        .tip-box strong { color: #0c5460; }
+        .toc { background: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .toc h2 { color: #0175C2; margin-bottom: 20px; }
+        .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .toc-item { padding: 10px 15px; background: #f0f8ff; border-left: 4px solid #0175C2; border-radius: 5px; }
+        .toc-item a { color: #0175C2; text-decoration: none; }
+        footer { text-align: center; padding: 30px; color: #666; margin-top: 50px; }
+        @media print { .section { page-break-inside: avoid; } body { background: white; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦋 Flutter Widgets Complete Guide</h1>
+            <p>Learn by Example: Design Output + Code + Practice</p>
+        </header>
+
+        <div class="toc">
+            <h2>📚 Table of Contents</h2>
+            <div class="toc-grid">
+                <div class="toc-item"><a href="#container">1. Container</a></div>
+                <div class="toc-item"><a href="#row-column">2. Row & Column</a></div>
+                <div class="toc-item"><a href="#text">3. Text</a></div>
+                <div class="toc-item"><a href="#buttons">4. Buttons</a></div>
+                <div class="toc-item"><a href="#image">5. Image</a></div>
+                <div class="toc-item"><a href="#textfield">6. TextField</a></div>
+                <div class="toc-item"><a href="#card">7. Card</a></div>
+                <div class="toc-item"><a href="#listview">8. ListView</a></div>
+                <div class="toc-item"><a href="#appbar">9. AppBar</a></div>
+                <div class="toc-item"><a href="#scaffold">10. Scaffold</a></div>
+                <div class="toc-item"><a href="#stack">11. Stack</a></div>
+                <div class="toc-item"><a href="#padding">12. Padding & Center</a></div>
+                <div class="toc-item"><a href="#expanded">13. Expanded & Flexible</a></div>
+                <div class="toc-item"><a href="#sizedbox">14. SizedBox</a></div>
+                <div class="toc-item"><a href="#divider">15. Divider</a></div>
+                <div class="toc-item"><a href="#circleavatar">16. CircleAvatar</a></div>
+                <div class="toc-item"><a href="#icon">17. Icon</a></div>
+                <div class="toc-item"><a href="#alertdialog">18. AlertDialog</a></div>
+                <div class="toc-item"><a href="#bottomnav">19. BottomNavigationBar</a></div>
+                <div class="toc-item"><a href="#tabbar">20. TabBar</a></div>
+                <div class="toc-item"><a href="#drawer">21. Drawer</a></div>
+                <div class="toc-item"><a href="#gridview">22. GridView</a></div>
+                <div class="toc-item"><a href="#switch">23. Switch & Checkbox</a></div>
+                <div class="toc-item"><a href="#slider">24. Slider</a></div>
+                <div class="toc-item"><a href="#dropdown">25. DropdownButton</a></div>
+            </div>
+        </div>
+
+        <!-- Container -->
+        <div id="container" class="section">
+            <div class="section-header">
+                <h2>1. Container Widget</h2>
+                <p>The most versatile widget for styling, sizing, and positioning</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Container?</h3>
+                    <p>A Container is a box that holds a single child widget. It's used for decoration, positioning, and sizing. Think of it as a div in HTML.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌─────────────────────────────────────┐
+│  ╔═══════════════════════════════╗   │
+│  ║   Styled Container            ║   │
+│  ║   (Gradient + Shadow)         ║   │
+│  ╚═══════════════════════════════╝   │
+│                                     │
+│           ⭕ Circle                 │
+│        (with teal border)           │
+│                                     │
+│  ┌ - - - - - - - - - - - - - - ┐  │
+│  │  With Dashed Border          │  │
+│  └ - - - - - - - - - - - - - - ┘  │
+└─────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Styled Container with Gradient
+Container(
+  width: 200,
+  height: 100,
+  decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [Colors.purple, Colors.blue],
+    ),
+    borderRadius: BorderRadius.circular(15),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black26,
+        blurRadius: 10,
+        offset: Offset(0, 5),
+      ),
+    ],
+  ),
+  child: Center(
+    child: Text(
+      'Styled Container',
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
+)
+
+// Circle Container
+Container(
+  width: 150,
+  height: 150,
+  decoration: BoxDecoration(
+    color: Colors.redAccent,
+    shape: BoxShape.circle,
+    border: Border.all(color: Colors.teal, width: 5),
+  ),
+  child: Center(child: Text('Circle')),
+)</pre>
+                </div>
+
+                <table>
+                    <tr><th>Property</th><th>Purpose</th></tr>
+                    <tr><td>width/height</td><td>Set dimensions</td></tr>
+                    <tr><td>color</td><td>Background color</td></tr>
+                    <tr><td>padding</td><td>Space INSIDE container</td></tr>
+                    <tr><td>margin</td><td>Space OUTSIDE container</td></tr>
+                    <tr><td>decoration</td><td>Advanced styling (BoxDecoration)</td></tr>
+                    <tr><td>alignment</td><td>Position child inside</td></tr>
+                    <tr><td>transform</td><td>Rotate, scale, translate</td></tr>
+                </table>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a container with rounded corners (radius 20) and blue background</li>
+                        <li>Make a circular container with an image inside</li>
+                        <li>Create a card-like container with shadow and border</li>
+                        <li>Make a gradient container with 3 colors</li>
+                        <li>Create a container centered with 50px margin on all sides</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row & Column -->
+        <div id="row-column" class="section">
+            <div class="section-header">
+                <h2>2. Row & Column Widgets</h2>
+                <p>Arrange widgets horizontally (Row) or vertically (Column)</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What are Row & Column?</h3>
+                    <p><strong>Row</strong> arranges children HORIZONTALLY (left to right).<br>
+                    <strong>Column</strong> arranges children VERTICALLY (top to bottom).</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+ROW Example:
+┌────────────────────────────────────────┐
+│ [Red Box]    [Teal Box]    [Green Box] │
+│  60x60        60x60         60x60      │
+│  (spaceBetween - evenly distributed)   │
+└────────────────────────────────────────┘
+
+COLUMN Example:
+┌────────────────────────────────────────┐
+│ ┌────────────────────────────────────┐ │
+│ │           Blue Bar                 │ │
+│ └────────────────────────────────────┘ │
+│ ┌────────────────────────────────────┐ │
+│ │          Purple Bar                │ │
+│ └────────────────────────────────────┘ │
+│ ┌────────────────────────────────────┐ │
+│ │           Pink Bar                 │ │
+│ └────────────────────────────────────┘ │
+│    (spaceEvenly - equal spacing)       │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// ROW - Horizontal arrangement
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    Container(
+      width: 60, height: 60,
+      color: Colors.redAccent,
+      child: Center(child: Text('1')),
+    ),
+    Container(
+      width: 60, height: 60,
+      color: Colors.teal,
+      child: Center(child: Text('2')),
+    ),
+    Container(
+      width: 60, height: 60,
+      color: Colors.greenAccent,
+      child: Center(child: Text('3')),
+    ),
+  ],
+)
+
+// COLUMN - Vertical arrangement
+Column(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  crossAxisAlignment: CrossAxisAlignment.stretch,
+  children: [
+    Container(height: 50, color: Colors.blue),
+    Container(height: 50, color: Colors.purple),
+    Container(height: 50, color: Colors.pink),
+  ],
+)</pre>
+                </div>
+
+                <table>
+                    <tr><th>Property</th><th>Values</th></tr>
+                    <tr><td>mainAxisAlignment</td><td>start, center, end, spaceBetween, spaceAround, spaceEvenly</td></tr>
+                    <tr><td>crossAxisAlignment</td><td>start, center, end, stretch, baseline</td></tr>
+                    <tr><td>mainAxisSize</td><td>min, max</td></tr>
+                </table>
+
+                <div class="tip-box">
+                    <strong>💡 Pro Tip:</strong> Use MainAxisAlignment.spaceBetween for even spacing, and CrossAxisAlignment.stretch to make children fill the cross axis.
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a Row with 3 icons spaced evenly</li>
+                        <li>Make a Column with logo on top, text in middle, button at bottom</li>
+                        <li>Create a profile header with avatar and name beside it (Row)</li>
+                        <li>Build a vertical list of 5 colored containers with 10px spacing</li>
+                        <li>Create a Row with one widget centered and others at edges</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text -->
+        <div id="text" class="section">
+            <div class="section-header">
+                <h2>3. Text Widget</h2>
+                <p>Display and style text with rich formatting options</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Text Widget?</h3>
+                    <p>Displays a string of text with single style. One of the most used widgets in any app.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│      Heading Text (32px, Blue)         │
+│                                        │
+│   Normal body text with default style  │
+│                                        │
+│      Bold & Colored (Pink)             │
+│                                        │
+│     S̶t̶r̶i̶k̶e̶t̶h̶r̶o̶u̶g̶h̶ ̶t̶e̶x̶t̶              │
+│                                        │
+│   S P A C E D   &   U P P E R C A S E  │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>Text(
+  'Hello, Flutter!',
+  style: TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Colors.blue,
+    letterSpacing: 2.0,
+    decoration: TextDecoration.underline,
+    fontStyle: FontStyle.italic,
+    shadows: [
+      Shadow(
+        color: Colors.black26,
+        offset: Offset(2, 2),
+        blurRadius: 4,
+      ),
+    ],
+  ),
+)
+
+// Multi-line with overflow handling
+Text(
+  'This is a very long text that will be truncated...',
+  maxLines: 2,
+  overflow: TextOverflow.ellipsis,
+  textAlign: TextAlign.center,
+  style: TextStyle(height: 1.5),
+)</pre>
+                </div>
+
+                <table>
+                    <tr><th>TextStyle Property</th><th>Description</th></tr>
+                    <tr><td>fontSize</td><td>Size of text</td></tr>
+                    <tr><td>fontWeight</td><td>bold, normal, w100-w900</td></tr>
+                    <tr><td>color</td><td>Text color</td></tr>
+                    <tr><td>fontStyle</td><td>normal or italic</td></tr>
+                    <tr><td>letterSpacing</td><td>Space between letters</td></tr>
+                    <tr><td>wordSpacing</td><td>Space between words</td></tr>
+                    <tr><td>decoration</td><td>underline, lineThrough</td></tr>
+                    <tr><td>height</td><td>Line height multiplier</td></tr>
+                </table>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a heading with 32px size and blue color</li>
+                        <li>Make a paragraph with 1.8 line height and justified alignment</li>
+                        <li>Create text with shadow effect</li>
+                        <li>Display text that truncates after 1 line with "..."</li>
+                        <li>Create price text with strikethrough original and bold new price</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div id="buttons" class="section">
+            <div class="section-header">
+                <h2>4. Button Widgets</h2>
+                <p>Elevated, Text, Outlined, and Icon buttons</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 Button Types</h3>
+                    <p><strong>ElevatedButton</strong>: Filled with shadow<br>
+                    <strong>TextButton</strong>: Flat, no background<br>
+                    <strong>OutlinedButton</strong>: Transparent with border<br>
+                    <strong>IconButton</strong>: Icon only</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│     ╭──────────────────────╮           │
+│     │  🔵 Elevated Button  │           │
+│     ╰──────────────────────╯           │
+│                                        │
+│          🔹 Text Button                │
+│                                        │
+│     ╭──────────────────────╮           │
+│     │  ○ Outlined Button   │           │
+│     ╰──────────────────────╯           │
+│                                        │
+│        ⭕ ♥    ⭕ ★  (IconButtons)      │
+│                                        │
+│  ╭──────────────────────────────────╮  │
+│  │   🌈 Full Width Gradient Button  │  │
+│  ╰──────────────────────────────────╯  │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Elevated Button
+ElevatedButton(
+  onPressed: () {
+    print('Pressed!');
+  },
+  style: ElevatedButton.styleFrom(
+    backgroundColor: Colors.blue,
+    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(25),
+    ),
+    elevation: 5,
+  ),
+  child: Text('Elevated Button'),
+)
+
+// Text Button
+TextButton(
+  onPressed: () {},
+  child: Text('Text Button'),
+)
+
+// Outlined Button
+OutlinedButton(
+  onPressed: () {},
+  style: OutlinedButton.styleFrom(
+    side: BorderSide(color: Colors.blue, width: 2),
+  ),
+  child: Text('Outlined'),
+)
+
+// Icon Button
+IconButton(
+  icon: Icon(Icons.favorite),
+  color: Colors.red,
+  iconSize: 30,
+  onPressed: () {},
+)
+
+// Gradient Button
+InkWell(
+  onTap: () {},
+  child: Container(
+    padding: EdgeInsets.all(15),
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Colors.purple, Colors.blue],
+      ),
+      borderRadius: BorderRadius.circular(25),
+    ),
+    child: Center(
+      child: Text('Gradient Button', 
+        style: TextStyle(color: Colors.white)),
+    ),
+  ),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create 3 buttons in a Row: Save (filled), Cancel (outlined), Delete (text)</li>
+                        <li>Make a rounded button with custom color and shadow</li>
+                        <li>Create a button with icon + text</li>
+                        <li>Build a full-width gradient button</li>
+                        <li>Make a circular icon button with 3 different icons</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image -->
+        <div id="image" class="section">
+            <div class="section-header">
+                <h2>5. Image Widget</h2>
+                <p>Display images from assets, network, or memory</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 Image Sources</h3>
+                    <p><strong>Network</strong>: From URL<br>
+                    <strong>Asset</strong>: Bundled with app (add to pubspec.yaml)<br>
+                    <strong>File</strong>: From device storage<br>
+                    <strong>Memory</strong>: From bytes</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│   ┌─────────────────────────────┐      │
+│   │                             │      │
+│   │    Network Image            │      │
+│   │    (with loading)           │      │
+│   │                             │      │
+│   └─────────────────────────────┘      │
+│                                        │
+│              ⭕                        │
+│         Circle Image                   │
+│      (with white border)               │
+│                                        │
+│   ┌─────────────────────────────┐      │
+│   │  ╭───────────────────────╮  │      │
+│   │  │    Rounded Image      │  │      │
+│   │  │    (20px radius)      │  │      │
+│   │  ╰───────────────────────╯  │      │
+│   └─────────────────────────────┘      │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Network Image with loading
+Image.network(
+  'https://picsum.photos/200/300',
+  width: 200,
+  height: 150,
+  fit: BoxFit.cover,
+  loadingBuilder: (context, child, progress) {
+    if (progress == null) return child;
+    return CircularProgressIndicator();
+  },
+  errorBuilder: (context, error, stack) {
+    return Icon(Icons.error, size: 50);
+  },
+)
+
+// Asset Image (declare in pubspec.yaml first!)
+Image.asset(
+  'assets/images/logo.png',
+  width: 150,
+  height: 150,
+  fit: BoxFit.contain,
+)
+
+// Circular Image
+ClipOval(
+  child: Image.network(
+    'https://i.pravatar.cc/150',
+    width: 100,
+    height: 100,
+    fit: BoxFit.cover,
+  ),
+)
+
+// Rounded corners
+ClipRRect(
+  borderRadius: BorderRadius.circular(20),
+  child: Image.network(
+    'https://picsum.photos/300/200',
+    fit: BoxFit.cover,
+  ),
+)</pre>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Don't forget:</strong> For asset images, add to pubspec.yaml:<br>
+                    <code>flutter: assets: - assets/images/</code>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Display a network image with loading indicator</li>
+                        <li>Create a circular profile picture with border</li>
+                        <li>Make an image with rounded corners (20px radius)</li>
+                        <li>Show error icon if image fails to load</li>
+                        <li>Create a grid of 4 images with 10px spacing</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- TextField -->
+        <div id="textfield" class="section">
+            <div class="section-header">
+                <h2>6. TextField Widget</h2>
+                <p>User input fields with validation and decoration</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is TextField?</h3>
+                    <p>Allows users to enter text. Highly customizable with InputDecoration.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│  ┌──────────────────────────────────┐  │
+│  │ Enter your name                  │  │
+│  └──────────────────────────────────┘  │
+│       (outlined border)                │
+│                                        │
+│  ┌──────────────────────────────────┐  │
+│  │ 🔒 Password              │  👁   │  │
+│  └──────────────────────────────────┘  │
+│     (with prefix & suffix icons)       │
+│                                        │
+│  ┌──────────────────────────────────┐  │
+│  │ 📧 Email                         │  │
+│  └──────────────────────────────────┘  │
+│       (focused - blue border)          │
+│                                        │
+│  ╭──────────────────────────────────╮  │
+│  │ 🔍  Search...                    │  │
+│  ╰──────────────────────────────────╯  │
+│       (rounded search style)           │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>TextField(
+  decoration: InputDecoration(
+    labelText: 'Email',
+    hintText: 'Enter your email',
+    prefixIcon: Icon(Icons.email),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.blue, width: 2),
+    ),
+    filled: true,
+    fillColor: Colors.grey[100],
+  ),
+  keyboardType: TextInputType.emailAddress,
+  onChanged: (value) {
+    print('Typing: $value');
+  },
+)
+
+// Password field
+TextField(
+  obscureText: true,
+  decoration: InputDecoration(
+    labelText: 'Password',
+    prefixIcon: Icon(Icons.lock),
+    suffixIcon: Icon(Icons.visibility),
+  ),
+)
+
+// Search style
+TextField(
+  decoration: InputDecoration(
+    hintText: 'Search...',
+    prefixIcon: Icon(Icons.search),
+    border: InputBorder.none,
+    filled: true,
+    fillColor: Colors.grey[200],
+    contentPadding: EdgeInsets.zero,
+  ),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a login form with email and password fields</li>
+                        <li>Make a search bar with rounded corners</li>
+                        <li>Create a multiline TextField for comments (maxLines: 5)</li>
+                        <li>Add validation to show error if email is empty</li>
+                        <li>Create a phone number field with number keyboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card -->
+        <div id="card" class="section">
+            <div class="section-header">
+                <h2>7. Card Widget</h2>
+                <p>Material Design card with elevation and rounded corners</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Card?</h3>
+                    <p>A sheet of Material with elevation (shadow) and rounded corners. Perfect for displaying related information.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│  ╭──────────────────────────────────╮  │
+│  │ 👤 John Doe          2 hours ago │  │
+│  │ ──────────────────────────────── │  │
+│  │ This is a card with content.     │  │
+│  │ Cards display related info.      │  │
+│  ╰──────────────────────────────────╯  │
+│              (shadow)                  │
+│                                        │
+│  ╭──────────────────────────────────╮  │
+│  │ ┌──────────────────────────────┐ │  │
+│  │ │                              │ │  │
+│  │ │    Image (full width)        │ │  │
+│  │ │                              │ │  │
+│  │ └──────────────────────────────┘ │  │
+│  │ Card Title                       │  │
+│  │ Supporting text...               │  │
+│  ╰──────────────────────────────────╯  │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>Card(
+  elevation: 5,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(12),
+  ),
+  child: Padding(
+    padding: EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.blue,
+              child: Icon(Icons.person),
+            ),
+            SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('John Doe', 
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('2 hours ago',
+                  style: TextStyle(color: Colors.grey)),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 12),
+        Text('Card content goes here...'),
+      ],
+    ),
+  ),
+)
+
+// Image Card
+Card(
+  clipBehavior: Clip.antiAlias,
+  child: Column(
+    children: [
+      Image.network(
+        'https://picsum.photos/300/150',
+        fit: BoxFit.cover,
+        height: 150,
+        width: double.infinity,
+      ),
+      ListTile(
+        title: Text('Card Title'),
+        subtitle: Text('Description text here'),
+      ),
+    ],
+  ),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a product card with image, title, price, and button</li>
+                        <li>Make a profile card with avatar, name, and stats</li>
+                        <li>Create a news card with thumbnail and headline</li>
+                        <li>Build a weather card with icon, temperature, and location</li>
+                        <li>Make 3 cards in a vertical list with 15px spacing</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- ListView -->
+        <div id="listview" class="section">
+            <div class="section-header">
+                <h2>8. ListView Widget</h2>
+                <p>Scrollable list - vertical or horizontal</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is ListView?</h3>
+                    <p>Displays a scrollable list. Use <code>ListView.builder</code> for long lists (lazy loading).</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│  ⭕ 1  Item One              ›        │
+│  ───────────────────────────────────── │
+│  ⭕ 2  Item Two              ›        │
+│  ───────────────────────────────────── │
+│  ⭕ 3  Item Three            ›        │
+│  ───────────────────────────────────── │
+│  ⭕ 4  Item Four             ›        │
+│  ───────────────────────────────────── │
+│  ⭕ 5  Item Five             ›        │
+│  ───────────────────────────────────── │
+│         (scrollable...)               │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Simple ListView
+ListView(
+  padding: EdgeInsets.all(16),
+  children: [
+    ListTile(
+      leading: CircleAvatar(child: Text('1')),
+      title: Text('Item One'),
+      subtitle: Text('Subtitle'),
+      trailing: Icon(Icons.arrow_forward),
+      onTap: () {},
+    ),
+    Divider(),
+    ListTile(
+      leading: CircleAvatar(child: Text('2')),
+      title: Text('Item Two'),
+    ),
+  ],
+)
+
+// Dynamic ListView (BEST for long lists!)
+ListView.builder(
+  itemCount: 100,
+  itemBuilder: (context, index) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: Colors.primaries[index % 18],
+        child: Text('${index + 1}'),
+      ),
+      title: Text('Item ${index + 1}'),
+      subtitle: Text('Subtitle $index'),
+      trailing: Icon(Icons.chevron_right),
+      onTap: () {
+        print('Tapped $index');
+      },
+    );
+  },
+)
+
+// Horizontal ListView
+ListView.builder(
+  scrollDirection: Axis.horizontal,
+  itemCount: 10,
+  itemBuilder: (context, index) {
+    return Container(
+      width: 150,
+      margin: EdgeInsets.all(8),
+      color: Colors.primaries[index % 18],
+      child: Center(child: Text('Card $index')),
+    );
+  },
+)</pre>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Performance Tip:</strong> Always use ListView.builder for lists with more than 20 items!
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a contact list with 20 names and phone numbers</li>
+                        <li>Make a horizontal scrolling list of category cards</li>
+                        <li>Create a chat list with avatar, name, message preview, and time</li>
+                        <li>Build a settings page with ListTiles and dividers</li>
+                        <li>Add pull-to-refresh functionality to a list</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- AppBar -->
+        <div id="appbar" class="section">
+            <div class="section-header">
+                <h2>9. AppBar Widget</h2>
+                <p>Top app bar with title, actions, and navigation</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is AppBar?</h3>
+                    <p>Top app bar with title, actions, and navigation elements.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│  ☰  Home                    🔍  ⋮     │
+│  ───────────────────────────────────── │
+│                                        │
+│         Content Area                   │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>AppBar(
+  title: Text('My App'),
+  centerTitle: true,
+  backgroundColor: Colors.blue,
+  elevation: 4,
+  leading: IconButton(
+    icon: Icon(Icons.menu),
+    onPressed: () {},
+  ),
+  actions: [
+    IconButton(
+      icon: Icon(Icons.search),
+      onPressed: () {},
+    ),
+    IconButton(
+      icon: Icon(Icons.more_vert),
+      onPressed: () {},
+    ),
+  ],
+  // Gradient AppBar
+  flexibleSpace: Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Colors.blue, Colors.purple],
+      ),
+    ),
+  ),
+)
+
+// With TabBar at bottom
+AppBar(
+  title: Text('WhatsApp'),
+  bottom: TabBar(
+    tabs: [
+      Tab(text: 'Chats'),
+      Tab(text: 'Status'),
+      Tab(text: 'Calls'),
+    ],
+  ),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create an AppBar with back button, title, and 2 action icons</li>
+                        <li>Make a gradient AppBar</li>
+                        <li>Create an AppBar with search icon that opens search field</li>
+                        <li>Add a profile avatar in the AppBar actions</li>
+                        <li>Create an AppBar with custom font title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scaffold -->
+        <div id="scaffold" class="section">
+            <div class="section-header">
+                <h2>10. Scaffold Widget</h2>
+                <p>Basic Material Design layout structure</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Scaffold?</h3>
+                    <p>Basic Material Design layout structure - provides AppBar, Body, FAB, Drawer, BottomNav.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│  📱 AppBar                             │
+│────────────────────────────────────────│
+│                                        │
+│         Body Content                   │
+│                                        │
+│                              ╭─────╮   │
+│                              │  +  │   │
+│                              ╰─────╯   │
+│────────────────────────────────────────│
+│   🏠 Home    🔍 Search    👤 Profile   │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>Scaffold(
+  appBar: AppBar(
+    title: Text('My App'),
+  ),
+  body: Center(
+    child: Text('Hello World'),
+  ),
+  floatingActionButton: FloatingActionButton(
+    onPressed: () {},
+    child: Icon(Icons.add),
+    backgroundColor: Colors.pink,
+  ),
+  bottomNavigationBar: BottomNavigationBar(
+    currentIndex: 0,
+    items: [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: 'Home',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.search),
+        label: 'Search',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        label: 'Profile',
+      ),
+    ],
+  ),
+  drawer: Drawer(
+    child: ListView(
+      children: [
+        DrawerHeader(
+          decoration: BoxDecoration(color: Colors.blue),
+          child: Text('Menu'),
+        ),
+        ListTile(
+          leading: Icon(Icons.home),
+          title: Text('Home'),
+          onTap: () {},
+        ),
+      ],
+    ),
+  ),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a complete page with AppBar, Body, FAB, and BottomNav</li>
+                        <li>Add a Drawer with 5 menu items</li>
+                        <li>Change FAB position to center (floatingActionButtonLocation)</li>
+                        <li>Add a SnackBar when FAB is pressed</li>
+                        <li>Create a page without AppBar but with custom body</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stack -->
+        <div id="stack" class="section">
+            <div class="section-header">
+                <h2>11. Stack Widget</h2>
+                <p>Overlay widgets on top of each other</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Stack?</h3>
+                    <p>Allows widgets to overlap. First child = bottom layer, last child = top layer.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│  ┌─────────────────────────────┐       │
+│  │  🖼️ Image (bottom layer)    │       │
+│  │                             │       │
+│  │  [NEW]              (badge) │       │
+│  │                    Overlay  │       │
+│  │  Overlay Text      Text     │       │
+│  └─────────────────────────────┘       │
+│                                        │
+│         ⭕ Avatar                      │
+│            🔴 (online dot - top right) │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>Stack(
+  children: [
+    // Bottom layer - Image
+    Container(
+      width: 200,
+      height: 150,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        image: DecorationImage(
+          image: NetworkImage('https://picsum.photos/200/150'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    ),
+    // Top layer - Text
+    Positioned(
+      bottom: 10,
+      left: 10,
+      child: Text(
+        'Overlay Text',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          shadows: [Shadow(blurRadius: 4)],
+        ),
+      ),
+    ),
+    // Badge
+    Positioned(
+      top: 10,
+      right: 10,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text('NEW',
+          style: TextStyle(color: Colors.white, fontSize: 12)),
+      ),
+    ),
+  ],
+)
+
+// Profile with online status
+Stack(
+  children: [
+    CircleAvatar(
+      radius: 50,
+      backgroundImage: NetworkImage('https://i.pravatar.cc/100'),
+    ),
+    Positioned(
+      bottom: 0,
+      right: 0,
+      child: Container(
+        width: 20,
+        height: 20,
+        decoration: BoxDecoration(
+          color: Colors.green,
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.white, width: 3),
+        ),
+      ),
+    ),
+  ],
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create an image with text overlay at bottom</li>
+                        <li>Make a profile picture with online status dot</li>
+                        <li>Create a card with "SALE" badge at top corner</li>
+                        <li>Build a photo with like button overlay</li>
+                        <li>Create a loading indicator overlay on a container</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Padding & Center -->
+        <div id="padding" class="section">
+            <div class="section-header">
+                <h2>12. Padding & Center Widgets</h2>
+                <p>Add space around widgets and center them</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 Padding & Center</h3>
+                    <p><strong>Padding</strong>: Adds space AROUND any widget<br>
+                    <strong>Center</strong>: Aligns child in the MIDDLE of available space</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+│ ▓ ┌────────────────────────────────┐ ▓ │
+│ ▓ │  Padding: 20px all sides       │ ▓ │
+│ ▓ └────────────────────────────────┘ ▓ │
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+│                                        │
+│ ┌────────────────────────────────────┐ │
+│ │                                    │ │
+│ │            [Centered]              │ │
+│ │                                    │ │
+│ └────────────────────────────────────┘ │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Padding - all sides
+Padding(
+  padding: EdgeInsets.all(20),
+  child: Container(
+    color: Colors.teal,
+    child: Text('Padded Content'),
+  ),
+)
+
+// Padding - specific sides
+Padding(
+  padding: EdgeInsets.only(
+    top: 10,
+    bottom: 20,
+    left: 15,
+    right: 15,
+  ),
+  child: Text('Custom padding'),
+)
+
+// Padding - symmetric
+Padding(
+  padding: EdgeInsets.symmetric(
+    horizontal: 30,
+    vertical: 10,
+  ),
+  child: ElevatedButton(
+    onPressed: () {},
+    child: Text('Button'),
+  ),
+)
+
+// Center widget
+Center(
+  child: Container(
+    width: 100,
+    height: 100,
+    color: Colors.red,
+  ),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a card with 20px padding on all sides</li>
+                        <li>Make a button with 40px horizontal and 15px vertical padding</li>
+                        <li>Center a loading spinner in the screen</li>
+                        <li>Create a form with 16px padding around all fields</li>
+                        <li>Make a container with different padding for each side</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expanded & Flexible -->
+        <div id="expanded" class="section">
+            <div class="section-header">
+                <h2>13. Expanded & Flexible Widgets</h2>
+                <p>Control how widgets share available space</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 Expanded vs Flexible</h3>
+                    <p><strong>Expanded</strong>: Forces child to FILL available space<br>
+                    <strong>Flexible</strong>: Allows child to be SMALLER if needed<br>
+                    Both only work inside Row, Column, or Flex</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+Expanded (fills space):
+┌────────────────────────────────────────┐
+│ [Red]  [────── Teal (2x) ──────]  [Grn]│
+│  flex:1           flex:2           flex:1│
+└────────────────────────────────────────┘
+
+Flexible (natural size):
+┌────────────────────────────────────────┐
+│ [Short] [──── Expanded ────] [Short]   │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>Row(
+  children: [
+    Expanded(
+      flex: 1,
+      child: Container(height: 50, color: Colors.red),
+    ),
+    Expanded(
+      flex: 2,
+      child: Container(height: 50, color: Colors.teal),
+    ),
+    Expanded(
+      flex: 1,
+      child: Container(height: 50, color: Colors.green),
+    ),
+  ],
+)
+
+// Common pattern: TextField + Button
+Row(
+  children: [
+    Expanded(
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Type message...',
+        ),
+      ),
+    ),
+    SizedBox(width: 10),
+    IconButton(
+      icon: Icon(Icons.send),
+      onPressed: () {},
+    ),
+  ],
+)</pre>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Common Pattern:</strong> Use Expanded with Text or TextField to prevent overflow errors in Rows.
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a Row with 3 containers in 1:2:1 ratio</li>
+                        <li>Make a chat input bar with TextField + Send button</li>
+                        <li>Create a profile row with Expanded name and fixed avatar</li>
+                        <li>Build a footer with 3 equal sections</li>
+                        <li>Make a card with Expanded image and fixed height text area</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- SizedBox -->
+        <div id="sizedbox" class="section">
+            <div class="section-header">
+                <h2>14. SizedBox Widget</h2>
+                <p>Create fixed-size boxes or add spacing</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is SizedBox?</h3>
+                    <p>Creates a box with fixed width/height. Most used for SPACING.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│ ┌────────────────────────────────────┐ │
+│ │           Widget 1                 │ │
+│ └────────────────────────────────────┘ │
+│         ↓ SizedBox(height: 20)         │
+│ ┌────────────────────────────────────┐ │
+│ │           Widget 2                 │ │
+│ └────────────────────────────────────┘ │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Vertical spacing
+Column(
+  children: [
+    Text('First'),
+    SizedBox(height: 20),
+    Text('Second'),
+    SizedBox(height: 40),
+    Text('Third'),
+  ],
+)
+
+// Horizontal spacing
+Row(
+  children: [
+    Icon(Icons.star),
+    SizedBox(width: 10),
+    Text('Rating'),
+    SizedBox(width: 20),
+    Icon(Icons.favorite),
+  ],
+)
+
+// Fixed size box
+SizedBox(
+  width: 100,
+  height: 100,
+  child: Container(color: Colors.blue),
+)
+
+// Full width button
+SizedBox(
+  width: double.infinity,
+  child: ElevatedButton(
+    onPressed: () {},
+    child: Text('Full Width Button'),
+  ),
+)
+
+// Square shortcut
+SizedBox.square(
+  dimension: 50,
+  child: Container(color: Colors.red),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a form with 20px spacing between fields</li>
+                        <li>Make a row of 3 icons with 15px spacing</li>
+                        <li>Create a full-width button using SizedBox</li>
+                        <li>Make a 50x50 square container</li>
+                        <li>Add spacing between avatar and name in profile row</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div id="divider" class="section">
+            <div class="section-header">
+                <h2>15. Divider Widget</h2>
+                <p>Horizontal or vertical line separator</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Divider?</h3>
+                    <p>A horizontal or vertical line to separate content.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│  Item 1                                │
+│ ────────────────────────────────────── │
+│  Item 2                                │
+│ ────────────────────────────────────── │
+│  Item 3                                │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>Column(
+  children: [
+    Text('Item 1'),
+    Divider(
+      color: Colors.grey,
+      thickness: 1,
+      height: 20,  // Space around divider
+    ),
+    Text('Item 2'),
+    Divider(color: Colors.grey),
+    Text('Item 3'),
+  ],
+)
+
+// Vertical divider (in Row)
+Row(
+  children: [
+    Text('Left'),
+    VerticalDivider(
+      color: Colors.grey,
+      thickness: 1,
+      width: 20,
+    ),
+    Text('Right'),
+  ],
+)
+
+// Custom styled divider
+Divider(
+  color: Colors.blue,
+  thickness: 2,
+  indent: 20,    // Left padding
+  endIndent: 20, // Right padding
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a settings list with dividers between items</li>
+                        <li>Make a vertical divider between two texts</li>
+                        <li>Create a section header with divider on both sides</li>
+                        <li>Style a divider with custom color and thickness</li>
+                        <li>Add spacing around dividers</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- CircleAvatar -->
+        <div id="circleavatar" class="section">
+            <div class="section-header">
+                <h2>16. CircleAvatar Widget</h2>
+                <p>Circular widget for images or initials</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is CircleAvatar?</h3>
+                    <p>A circular widget to display images or initials.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│    ⭕ With Image    ⭕ With Initials   │
+│                                        │
+│    ⭕ With Border   ⭕ With Icon       │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// With Image
+CircleAvatar(
+  radius: 50,
+  backgroundImage: NetworkImage(
+    'https://i.pravatar.cc/100',
+  ),
+)
+
+// With Initials
+CircleAvatar(
+  radius: 40,
+  backgroundColor: Colors.blue,
+  child: Text(
+    'JD',
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+)
+
+// With custom border (wrap in Container)
+Container(
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    border: Border.all(color: Colors.blue, width: 3),
+  ),
+  child: CircleAvatar(
+    radius: 48,
+    backgroundImage: NetworkImage('https://i.pravatar.cc/100'),
+  ),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a profile avatar with user initials</li>
+                        <li>Make an avatar with online status indicator</li>
+                        <li>Create a list of 5 avatars in a Row</li>
+                        <li>Make an avatar with gradient border</li>
+                        <li>Create different sized avatars (small, medium, large)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Icon -->
+        <div id="icon" class="section">
+            <div class="section-header">
+                <h2>17. Icon Widget</h2>
+                <p>Display Material Design icons</p>
+                <span class="badge badge-beginner">Beginner</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Icon?</h3>
+                    <p>Displays a Material Design icon from the built-in icon set.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│   ❤️    ⭐    📧    🔒    🏠    ⚙️     │
+│  (red) (gold) (blue) (grey)           │
+│                                        │
+│   Large:  📱 (size: 50)               │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>Icon(
+  Icons.favorite,
+  color: Colors.red,
+  size: 30,
+)
+
+// Common icons
+Icon(Icons.home)
+Icon(Icons.search)
+Icon(Icons.settings)
+Icon(Icons.person)
+Icon(Icons.email)
+Icon(Icons.phone)
+Icon(Icons.lock)
+Icon(Icons.star)
+Icon(Icons.check_circle)
+Icon(Icons.error)
+
+// In buttons
+IconButton(
+  icon: Icon(Icons.delete),
+  color: Colors.red,
+  onPressed: () {},
+)
+
+// With background
+Container(
+  padding: EdgeInsets.all(8),
+  decoration: BoxDecoration(
+    color: Colors.blue[50],
+    shape: BoxShape.circle,
+  ),
+  child: Icon(
+    Icons.notifications,
+    color: Colors.blue,
+  ),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a row of 5 social media icons</li>
+                        <li>Make an icon with circular background</li>
+                        <li>Create a rating display with 5 stars</li>
+                        <li>Make a settings icon that rotates when pressed</li>
+                        <li>Create different sized icons for different purposes</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- AlertDialog -->
+        <div id="alertdialog" class="section">
+            <div class="section-header">
+                <h2>18. AlertDialog Widget</h2>
+                <p>Popup dialog for alerts and confirmations</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is AlertDialog?</h3>
+                    <p>A popup dialog to show important information or get user confirmation.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│    ╭──────────────────────────────╮    │
+│    │  ⚠️  Confirm Delete          │    │
+│    │                              │    │
+│    │  Are you sure you want to    │    │
+│    │  delete this item?           │    │
+│    │                              │    │
+│    │    [Cancel]  [Delete]        │    │
+│    ╰──────────────────────────────╯    │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Show dialog
+showDialog(
+  context: context,
+  builder: (BuildContext context) {
+    return AlertDialog(
+      title: Text('Confirm Delete'),
+      content: Text('Are you sure you want to delete this item?'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            // Delete action
+            Navigator.of(context).pop();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red,
+          ),
+          child: Text('Delete'),
+        ),
+      ],
+    );
+  },
+)
+
+// With icon
+AlertDialog(
+  icon: Icon(Icons.warning, color: Colors.orange, size: 40),
+  title: Text('Warning'),
+  content: Text('This action cannot be undone.'),
+  actions: [...],
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a logout confirmation dialog</li>
+                        <li>Make a dialog with 3 options (Yes, No, Cancel)</li>
+                        <li>Create a custom dialog with image and text</li>
+                        <li>Make a success dialog with checkmark icon</li>
+                        <li>Add input field to a dialog</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- BottomNavigationBar -->
+        <div id="bottomnav" class="section">
+            <div class="section-header">
+                <h2>19. BottomNavigationBar Widget</h2>
+                <p>Bottom navigation with 3-5 items</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is BottomNavigationBar?</h3>
+                    <p>Navigation bar at the bottom with 3-5 items.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│              (Content)                 │
+│                                        │
+│────────────────────────────────────────│
+│    🏠        🔍        ❤️        👤    │
+│   Home     Search    Favorites  Profile│
+│  (active)                              │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    HomePage(),
+    SearchPage(),
+    FavoritesPage(),
+    ProfilePage(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
+  }
+}</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a bottom nav with 4 pages</li>
+                        <li>Add badges to nav items (notification count)</li>
+                        <li>Change active/inactive colors</li>
+                        <li>Make a floating bottom nav (rounded corners)</li>
+                        <li>Add animation when switching tabs</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- TabBar -->
+        <div id="tabbar" class="section">
+            <div class="section-header">
+                <h2>20. TabBar Widget</h2>
+                <p>Horizontal tabs at the top</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is TabBar?</h3>
+                    <p>Horizontal tabs at the top of the screen.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│  My App                                │
+│────────────────────────────────────────│
+│  [Chats]   [Status]   [Calls]         │
+│  ────────                              │
+│  (active tab indicator)                │
+│────────────────────────────────────────│
+│                                        │
+│         Tab Content Here               │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>class MyTabApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('WhatsApp'),
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Chats'),
+              Tab(text: 'Status'),
+              Tab(text: 'Calls'),
+            ],
+            indicatorColor: Colors.white,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white70,
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            // Tab 1: Chats
+            ListView(
+              children: [
+                ListTile(
+                  leading: CircleAvatar(child: Text('A')),
+                  title: Text('Alice'),
+                  subtitle: Text('Hello!'),
+                ),
+              ],
+            ),
+            // Tab 2: Status
+            Center(child: Text('Status Page')),
+            // Tab 3: Calls
+            Center(child: Text('Calls Page')),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// With icons
+TabBar(
+  tabs: [
+    Tab(icon: Icon(Icons.chat), text: 'Chats'),
+    Tab(icon: Icon(Icons.circle), text: 'Status'),
+    Tab(icon: Icon(Icons.call), text: 'Calls'),
+  ],
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a tab bar with 3 tabs and different content</li>
+                        <li>Add icons to tabs</li>
+                        <li>Create a scrollable tab bar with 10 tabs</li>
+                        <li>Customize tab indicator (color, height, shape)</li>
+                        <li>Make tabs with badges</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drawer -->
+        <div id="drawer" class="section">
+            <div class="section-header">
+                <h2>21. Drawer Widget</h2>
+                <p>Side navigation panel</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Drawer?</h3>
+                    <p>Side navigation panel that slides in from the left.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│ ╭──────────────────────────╮           │
+│ │ 🖼️  Drawer Header        │           │
+│ │     User Name            │           │
+│ │     email@example.com    │           │
+│ ├──────────────────────────┤           │
+│ │ 🏠 Home                  │           │
+│ ├──────────────────────────┤           │
+│ │ 👤 Profile               │           │
+│ ├──────────────────────────┤           │
+│ │ ⚙️ Settings              │           │
+│ ├──────────────────────────┤           │
+│ │ 🚪 Logout                │           │
+│ ╰──────────────────────────╯           │
+│      (slides from left)                │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>Scaffold(
+  appBar: AppBar(title: Text('My App')),
+  drawer: Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        // Header
+        DrawerHeader(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            gradient: LinearGradient(
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(
+                  'https://i.pravatar.cc/100'),
+              ),
+              SizedBox(height: 10),
+              Text('John Doe',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold)),
+              Text('john@example.com',
+                style: TextStyle(color: Colors.white70)),
+            ],
+          ),
+        ),
+        // Menu items
+        ListTile(
+          leading: Icon(Icons.home),
+          title: Text('Home'),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.person),
+          title: Text('Profile'),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text('Settings'),
+          onTap: () {},
+        ),
+        Divider(),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('Logout'),
+          onTap: () {},
+        ),
+      ],
+    ),
+  ),
+  body: Center(child: Text('Home Page')),
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a drawer with user profile header</li>
+                        <li>Add 6 menu items with icons</li>
+                        <li>Make a drawer with expandable sections</li>
+                        <li>Add a dark mode toggle in drawer</li>
+                        <li>Create a right-side drawer (endDrawer)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- GridView -->
+        <div id="gridview" class="section">
+            <div class="section-header">
+                <h2>22. GridView Widget</h2>
+                <p>Display items in a 2D grid</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is GridView?</h3>
+                    <p>Displays items in a 2D grid (rows and columns).</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│ ┌─────┐ ┌─────┐ ┌─────┐               │
+│ │  1  │ │  2  │ │  3  │               │
+│ └─────┘ └─────┘ └─────┘               │
+│ ┌─────┐ ┌─────┐ ┌─────┐               │
+│ │  4  │ │  5  │ │  6  │               │
+│ └─────┘ └─────┘ └─────┘               │
+│ ┌─────┐ ┌─────┐ ┌─────┐               │
+│ │  7  │ │  8  │ │  9  │               │
+│ └─────┘ └─────┘ └─────┘               │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Simple GridView
+GridView.count(
+  crossAxisCount: 3,  // 3 columns
+  padding: EdgeInsets.all(10),
+  crossAxisSpacing: 10,
+  mainAxisSpacing: 10,
+  children: List.generate(9, (index) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.primaries[index % 18],
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: Text(
+          '${index + 1}',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }),
+)
+
+// Dynamic GridView (BEST for many items)
+GridView.builder(
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: 10,
+    mainAxisSpacing: 10,
+    childAspectRatio: 0.8,  // width/height ratio
+  ),
+  itemCount: 20,
+  itemBuilder: (context, index) {
+    return Card(
+      child: Column(
+        children: [
+          Expanded(
+            child: Image.network(
+              'https://picsum.photos/200?random=$index',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Text('Item $index'),
+          ),
+        ],
+      ),
+    );
+  },
+)</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a photo gallery grid (3 columns)</li>
+                        <li>Make a product grid with images and prices</li>
+                        <li>Create a grid with different sized items</li>
+                        <li>Add tap effect to grid items</li>
+                        <li>Make a grid that scrolls horizontally</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Switch & Checkbox -->
+        <div id="switch" class="section">
+            <div class="section-header">
+                <h2>23. Switch & Checkbox Widgets</h2>
+                <p>Toggle and selection widgets</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 Switch & Checkbox</h3>
+                    <p><strong>Switch</strong>: On/off toggle (like iOS/Android settings)<br>
+                    <strong>Checkbox</strong>: Multiple selection</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│  Dark Mode    ╭──────────╮             │
+│               │    ●     │  (ON)       │
+│               ╰──────────╯             │
+│                                        │
+│  Notifications  ╭────╮                 │
+│                 ╰────╯    (OFF)        │
+│                                        │
+│  ☑️ Receive emails                     │
+│  ☐ Receive SMS                         │
+│  ☑️ Receive push notifications         │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>// Switch
+class SettingsPage extends StatefulWidget {
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  bool isDarkMode = false;
+  bool notifications = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SwitchListTile(
+          title: Text('Dark Mode'),
+          subtitle: Text('Enable dark theme'),
+          value: isDarkMode,
+          onChanged: (value) {
+            setState(() {
+              isDarkMode = value;
+            });
+          },
+        ),
+        SwitchListTile(
+          title: Text('Notifications'),
+          value: notifications,
+          activeColor: Colors.blue,
+          onChanged: (value) {
+            setState(() {
+              notifications = value;
+            });
+          },
+        ),
+      ],
+    );
+  }
+}
+
+// Checkbox
+class CheckboxExample extends StatefulWidget {
+  @override
+  _CheckboxExampleState createState() => _CheckboxExampleState();
+}
+
+class _CheckboxExampleState extends State<CheckboxExample> {
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Checkbox(
+          value: isChecked,
+          onChanged: (value) {
+            setState(() {
+              isChecked = value!;
+            });
+          },
+        ),
+        CheckboxListTile(
+          title: Text('Receive emails'),
+          value: isChecked,
+          onChanged: (value) {
+            setState(() {
+              isChecked = value!;
+            });
+          },
+        ),
+      ],
+    );
+  }
+}</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a settings page with 5 switches</li>
+                        <li>Make a todo list with checkboxes</li>
+                        <li>Create a filter screen with multiple checkboxes</li>
+                        <li>Add custom colors to switches</li>
+                        <li>Make a terms & conditions checkbox with validation</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider -->
+        <div id="slider" class="section">
+            <div class="section-header">
+                <h2>24. Slider Widget</h2>
+                <p>Select value from a range</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is Slider?</h3>
+                    <p>A horizontal slider to select a value from a range.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│  Volume                                │
+│  ══════════●═══════════  50           │
+│         (drag to change)               │
+│                                        │
+│  Brightness                            │
+│  ●══════════════════════  0            │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>class SliderExample extends StatefulWidget {
+  @override
+  _SliderExampleState createState() => _SliderExampleState();
+}
+
+class _SliderExampleState extends State<SliderExample> {
+  double _value = 50;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('Volume: ${_value.round()}'),
+        Slider(
+          value: _value,
+          min: 0,
+          max: 100,
+          divisions: 100,
+          label: _value.round().toString(),
+          activeColor: Colors.blue,
+          inactiveColor: Colors.grey[300],
+          onChanged: (value) {
+            setState(() {
+              _value = value;
+            });
+          },
+        ),
+
+        // Range Slider (two thumbs)
+        RangeSlider(
+          values: RangeValues(20, 80),
+          min: 0,
+          max: 100,
+          onChanged: (RangeValues values) {
+            print('Start: ${values.start}, End: ${values.end}');
+          },
+        ),
+      ],
+    );
+  }
+}</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a volume control slider</li>
+                        <li>Make a price range filter with RangeSlider</li>
+                        <li>Create a rating slider (1-5 stars)</li>
+                        <li>Add custom thumb shape to slider</li>
+                        <li>Make a color picker using multiple sliders (RGB)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- DropdownButton -->
+        <div id="dropdown" class="section">
+            <div class="section-header">
+                <h2>25. DropdownButton Widget</h2>
+                <p>Select from a dropdown menu</p>
+                <span class="badge badge-intermediate">Intermediate</span>
+            </div>
+            <div class="section-content">
+                <div class="description">
+                    <h3>📖 What is DropdownButton?</h3>
+                    <p>A button that shows a dropdown menu when pressed.</p>
+                </div>
+
+                <div class="design-output">
+                    <h4>🎨 Design Output</h4>
+                    <pre>
+┌────────────────────────────────────────┐
+│                                        │
+│  Country: ┌──────────────────┐         │
+│           │  🇧🇩 Bangladesh ▼ │         │
+│           └──────────────────┘         │
+│                                        │
+│  (when opened:)                        │
+│  ┌──────────────────┐                  │
+│  │  🇧🇩 Bangladesh   │                  │
+│  │  🇮🇳 India        │                  │
+│  │  🇵🇰 Pakistan     │                  │
+│  │  🇱🇰 Sri Lanka    │                  │
+│  └──────────────────┘                  │
+│                                        │
+└────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>💻 Code Example</h4>
+                    <pre>class DropdownExample extends StatefulWidget {
+  @override
+  _DropdownExampleState createState() => _DropdownExampleState();
+}
+
+class _DropdownExampleState extends State<DropdownExample> {
+  String? selectedCountry;
+  List<String> countries = [
+    'Bangladesh',
+    'India',
+    'Pakistan',
+    'Sri Lanka',
+    'Nepal',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        DropdownButton<String>(
+          value: selectedCountry,
+          hint: Text('Select Country'),
+          isExpanded: true,
+          items: countries.map((String country) {
+            return DropdownMenuItem<String>(
+              value: country,
+              child: Text(country),
+            );
+          }).toList(),
+          onChanged: (String? value) {
+            setState(() {
+              selectedCountry = value;
+            });
+          },
+        ),
+
+        // Styled dropdown
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value: selectedCountry,
+              hint: Text('Choose...'),
+              icon: Icon(Icons.arrow_drop_down),
+              isExpanded: true,
+              items: countries.map((String country) {
+                return DropdownMenuItem(
+                  value: country,
+                  child: Row(
+                    children: [
+                      Icon(Icons.flag),
+                      SizedBox(width: 10),
+                      Text(country),
+                    ],
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedCountry = value;
+                });
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}</pre>
+                </div>
+
+                <div class="practice-box">
+                    <h3>✏️ Practice Exercises</h3>
+                    <ol>
+                        <li>Create a country selector dropdown</li>
+                        <li>Make a dropdown with icons and text</li>
+                        <li>Create a dropdown with custom styling (border, padding)</li>
+                        <li>Make a dropdown that shows selected item in a Text widget</li>
+                        <li>Create a form with 3 dropdowns (Country, City, Area)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bonus Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🎓 BONUS: Mini Project Ideas</h2>
+                <p>Practice with these complete projects</p>
+            </div>
+            <div class="section-content">
+                <table>
+                    <tr><th>Project</th><th>Widgets to Use</th></tr>
+                    <tr><td>📱 Profile App</td><td>Scaffold, AppBar, CircleAvatar, Text, Column, Card, Divider</td></tr>
+                    <tr><td>🛒 Product List App</td><td>ListView.builder, Card, Image, Text, Row, Column, IconButton</td></tr>
+                    <tr><td>💬 Chat UI</td><td>ListView, Row, CircleAvatar, Container, TextField, IconButton</td></tr>
+                    <tr><td>📝 Todo App</td><td>ListView, CheckboxListTile, TextField, FloatingActionButton, Card</td></tr>
+                    <tr><td>🎵 Music Player UI</td><td>Stack, Container, Slider, Row, IconButton, Text</td></tr>
+                    <tr><td>📸 Instagram Clone</td><td>ListView, Card, Image, Row, IconButton, Text, CircleAvatar</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Quick Reference -->
+        <div class="section">
+            <div class="section-header">
+                <h2>📋 Quick Reference Cheat Sheet</h2>
+                <p>All widgets at a glance</p>
+            </div>
+            <div class="section-content">
+                <h3>Layout Widgets</h3>
+                <table>
+                    <tr><th>Widget</th><th>Purpose</th></tr>
+                    <tr><td>Container</td><td>Box with styling</td></tr>
+                    <tr><td>Row</td><td>Horizontal layout</td></tr>
+                    <tr><td>Column</td><td>Vertical layout</td></tr>
+                    <tr><td>Stack</td><td>Overlap widgets</td></tr>
+                    <tr><td>Padding</td><td>Add space around</td></tr>
+                    <tr><td>Center</td><td>Center child</td></tr>
+                    <tr><td>Expanded</td><td>Fill available space</td></tr>
+                    <tr><td>SizedBox</td><td>Fixed size / spacing</td></tr>
+                    <tr><td>Scaffold</td><td>App structure</td></tr>
+                </table>
+
+                <h3>Content Widgets</h3>
+                <table>
+                    <tr><th>Widget</th><th>Purpose</th></tr>
+                    <tr><td>Text</td><td>Display text</td></tr>
+                    <tr><td>Image</td><td>Display images</td></tr>
+                    <tr><td>Icon</td><td>Display icons</td></tr>
+                    <tr><td>Card</td><td>Material card</td></tr>
+                    <tr><td>CircleAvatar</td><td>Circular image</td></tr>
+                    <tr><td>Divider</td><td>Line separator</td></tr>
+                </table>
+
+                <h3>Input Widgets</h3>
+                <table>
+                    <tr><th>Widget</th><th>Purpose</th></tr>
+                    <tr><td>TextField</td><td>Text input</td></tr>
+                    <tr><td>Button</td><td>Elevated/Text/Outlined</td></tr>
+                    <tr><td>Switch</td><td>On/off toggle</td></tr>
+                    <tr><td>Checkbox</td><td>Multiple selection</td></tr>
+                    <tr><td>Slider</td><td>Range selection</td></tr>
+                    <tr><td>Dropdown</td><td>Select from list</td></tr>
+                    <tr><td>IconButton</td><td>Icon as button</td></tr>
+                </table>
+
+                <h3>Navigation Widgets</h3>
+                <table>
+                    <tr><th>Widget</th><th>Purpose</th></tr>
+                    <tr><td>AppBar</td><td>Top bar</td></tr>
+                    <tr><td>Drawer</td><td>Side menu</td></tr>
+                    <tr><td>BottomNav</td><td>Bottom navigation</td></tr>
+                    <tr><td>TabBar</td><td>Tabs</td></tr>
+                    <tr><td>AlertDialog</td><td>Popup dialog</td></tr>
+                </table>
+
+                <h3>Scroll Widgets</h3>
+                <table>
+                    <tr><th>Widget</th><th>Purpose</th></tr>
+                    <tr><td>ListView</td><td>Scrollable list</td></tr>
+                    <tr><td>GridView</td><td>2D grid</td></tr>
+                    <tr><td>SingleChildScrollView</td><td>Scroll single child</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="section">
+            <div class="section-header">
+                <h2>💡 Tips for Students</h2>
+                <p>Best practices for Flutter development</p>
+            </div>
+            <div class="section-content">
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ Always use <code>const</code> when possible for better performance</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ Use <code>ListView.builder</code> for long lists</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ Wrap Text in <code>Expanded</code> inside Row to prevent overflow</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ Use <code>debugPrint()</code> instead of <code>print()</code> for long messages</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ Hot reload (<code>Ctrl+\</code> or <code>Cmd+\</code>) to see changes instantly</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ Use Flutter Inspector to debug layouts</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">✅ Break complex UIs into smaller widgets</li>
+                    <li style="padding: 10px 0;">✅ Follow Material Design guidelines</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>Happy Coding! 🚀</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Flutter Widgets Complete Teaching Guide</p>
+        </footer>
+    </div>
+</body>
+</html>
