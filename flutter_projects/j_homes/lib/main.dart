@@ -57,7 +57,13 @@ class HomePage extends StatelessWidget {
       home: Scaffold(
         extendBodyBehindAppBar: true,
 
-        body: BlogCard(),
+        body:  ListView.builder(
+          itemCount: titleImage.length,
+          
+          itemBuilder: (context, index) {
+            return BlogCard(title: titleImage[index]["title"]!,img: titleImage[index]["img"]!,);
+          },
+        ),
 
         //  GridView.builder(
         //           scrollDirection: Axis.horizontal,
@@ -77,26 +83,7 @@ class HomePage extends StatelessWidget {
         //           },
         //         ),
 
-        // ListView.builder(
-        //   itemCount: 10,
-        //   itemBuilder: (context, index) {
-        //     return Expanded(
-        //       child: Container(
-        //         width: 400,
-        //         height: 400,
-
-        //         margin: EdgeInsets.all(8),
-        //         // color: Colors.primaries[index % 18],
-        //         decoration: BoxDecoration(
-        //           image: DecorationImage(
-        //             image: NetworkImage('https://picsum.photos/300/$index'),
-        //             fit: BoxFit.fitHeight,
-        //           ),
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // ),
+       
 
         //   ListView(
         //     children: [
@@ -128,8 +115,8 @@ class HomePage extends StatelessWidget {
 }
 
 class BlogCard extends StatelessWidget {
-   new({super.key, required this.title, required this.img});
-  String title, img;
+ const  new({super.key, required this.title, required this.img});
+final  String title, img;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -140,7 +127,7 @@ class BlogCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 10,
           children: [
-            Image(image: AssetImage("assets/ghor.jpg")),
+            Image(image: AssetImage(img)),
             Text(
               "February 20, 2025",
               style: TextStyle(
@@ -150,7 +137,7 @@ class BlogCard extends StatelessWidget {
               ),
             ),
             Text(
-              "Renting Made Easy: Tips for Landlords, Tenants & Vendors",
+              title,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight(600)),
             ),
             Text(
