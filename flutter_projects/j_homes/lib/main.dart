@@ -1,5 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:j_homes/screens/home_page.dart';
 
 void main() {
   runApp(const JHomesApp());
@@ -23,47 +26,73 @@ class JHomesApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
-  List<Map<String, String>> titleImage = [
-    {
-      "title": "Renting Made Easy: Tips for Landlords, Tenants & Vendors",
-      "img": "assets/images/1.jpg",
-    },
-    {
-      "title": "Landlord-Tenant Laws: Key Rights & Responsibilities",
-      "img": "assets/images/2.jpg",
-    },
-    {
-      "title":
-          "Avoiding Common Rental Disputes: A Guide for Landlords & Tenants",
-      "img": "assets/images/3.jpg",
-    },
-    {
-      "title":
-          "The Future of Property Management: Trends for Landlords & Vendors",
-      "img": "assets/images/4.jpg",
-    },
-    {
-      "title": "Maximizing Rental Income: Strategies for Smart Landlords",
-      "img": "assets/images/5.jpg",
-    },
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'JHomes - Property Rental Solutions',
-      home: Scaffold(
-        extendBodyBehindAppBar: true,
+// class HomePage extends StatelessWidget {
+//   HomePage({super.key});
+//   List<Map<String, String>> titleImage = [
+//     {
+//       "title": "Renting Made Easy: Tips for Landlords, Tenants & Vendors",
+//       "img": "assets/images/1.jpg",
+//     },
+//     {
+//       "title": "Landlord-Tenant Laws: Key Rights & Responsibilities",
+//       "img": "assets/images/2.jpg",
+//     },
+//     {
+//       "title":
+//           "Avoiding Common Rental Disputes: A Guide for Landlords & Tenants",
+//       "img": "assets/images/3.jpg",
+//     },
+//     {
+//       "title":
+//           "The Future of Property Management: Trends for Landlords & Vendors",
+//       "img": "assets/images/4.jpg",
+//     },
+//     {
+//       "title": "Maximizing Rental Income: Strategies for Smart Landlords",
+//       "img": "assets/images/5.jpg",
+//     },
+//   ];
+//   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+//   @override
+//   Widget build(BuildContext context) {
+    
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'JHomes - Property Rental Solutions',
+//       home: Scaffold(
+//         extendBodyBehindAppBar: true,
+//         appBar: AppBar(
+//           title: Text('My App'),
+//           centerTitle: true,
+//           backgroundColor: Colors.blue,
+//           elevation: 4,
+//           leading: IconButton(
+//             icon: Icon(Icons.menu),
+//             onPressed: () {
+//               _scaffoldKey.currentState?.openDrawer();
+//             },
+//           ),
+//           actions: [
+//             IconButton(icon: Icon(Icons.search), onPressed: () {}),
+//             IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+//           ],
+//           // Gradient AppBar
+//           flexibleSpace: Container(
+//             decoration: BoxDecoration(
+//               gradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
+//             ),
+//           ),
+//         ),
+//         body: ListView.builder(
+//           itemCount: titleImage.length,
 
-        body:  ListView.builder(
-          itemCount: titleImage.length,
-          
-          itemBuilder: (context, index) {
-            return BlogCard(title: titleImage[index]["title"]!,img: titleImage[index]["img"]!,);
-          },
-        ),
+//           itemBuilder: (context, index) {
+//             return BlogCard(
+//               title: titleImage[index]["title"]!,
+//               img: titleImage[index]["img"]!,
+//             );
+//           },
+//         ),
 
         //  GridView.builder(
         //           scrollDirection: Axis.horizontal,
@@ -82,8 +111,6 @@ class HomePage extends StatelessWidget {
         //             );
         //           },
         //         ),
-
-       
 
         //   ListView(
         //     children: [
@@ -108,15 +135,15 @@ class HomePage extends StatelessWidget {
         //       ),
         //     ],
         //   ),
-        // ),
-      ),
-    );
-  }
-}
+//         // ),
+//       ),
+//     );
+//   }
+// }
 
 class BlogCard extends StatelessWidget {
- const  new({super.key, required this.title, required this.img});
-final  String title, img;
+  const new({super.key, required this.title, required this.img});
+  final String title, img;
   @override
   Widget build(BuildContext context) {
     return Card(
