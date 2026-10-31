@@ -9,11 +9,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CustomDrawer(),
-      backgroundColor: Colors.amberAccent,
+      backgroundColor: Colors.red,
       appBar: CustomAppBar(title: "Home"),
       body: Center(child: Text("This is HomePage")),
     );
   }
 }
-
-

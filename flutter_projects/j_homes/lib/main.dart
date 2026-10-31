@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:j_homes/screens/home_page.dart';
+import 'package:j_homes/screens/my_home_page.dart';
+import 'package:j_homes/widgets/my_tab_bar.dart';
 
 void main() {
   runApp(const JHomesApp());
@@ -21,7 +22,7 @@ class JHomesApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFA5C3C6),
         fontFamily: 'onset',
       ),
-      home: HomePage(),
+      home: MyTabBar(),
     );
   }
 }
@@ -55,7 +56,6 @@ class JHomesApp extends StatelessWidget {
 //   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 //   @override
 //   Widget build(BuildContext context) {
-    
 //     return MaterialApp(
 //       debugShowCheckedModeBanner: false,
 //       title: 'JHomes - Property Rental Solutions',
@@ -94,48 +94,48 @@ class JHomesApp extends StatelessWidget {
 //           },
 //         ),
 
-        //  GridView.builder(
-        //           scrollDirection: Axis.horizontal,
-        //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //             crossAxisCount: 2,
-        //             childAspectRatio: 0.5,
-        //           ),
-        //           itemCount: 20,
-        //           itemBuilder: (context, index) {
-        //             return Card(
-        //               child: Container(
-        //                 height: 200,
-        //                 width: 200,
-        //                 color: Colors.primaries[index % 9],
-        //               ),
-        //             );
-        //           },
-        //         ),
+//  GridView.builder(
+//           scrollDirection: Axis.horizontal,
+//           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//             crossAxisCount: 2,
+//             childAspectRatio: 0.5,
+//           ),
+//           itemCount: 20,
+//           itemBuilder: (context, index) {
+//             return Card(
+//               child: Container(
+//                 height: 200,
+//                 width: 200,
+//                 color: Colors.primaries[index % 9],
+//               ),
+//             );
+//           },
+//         ),
 
-        //   ListView(
-        //     children: [
-        //       Column(
-        //         children: [
-        //           // HowWorks(),
-        //           // OpenRentels(),
+//   ListView(
+//     children: [
+//       Column(
+//         children: [
+//           // HowWorks(),
+//           // OpenRentels(),
 
-        //           ListTile(
-        //             leading: CircleAvatar(child: Text('1')),
-        //             title: Text('Item One'),
-        //             subtitle: Text('Subtitle'),
-        //             trailing: Icon(Icons.arrow_forward),
-        //             onTap: () {},
-        //           ),
-        //           Divider(),
-        //           ListTile(
-        //             leading: CircleAvatar(child: Text('2')),
-        //             title: Text('Item Two'),
-        //           ),
-        //         ],
-        //       ),
-        //     ],
-        //   ),
-//         // ),
+//           ListTile(
+//             leading: CircleAvatar(child: Text('1')),
+//             title: Text('Item One'),
+//             subtitle: Text('Subtitle'),
+//             trailing: Icon(Icons.arrow_forward),
+//             onTap: () {},
+//           ),
+//           Divider(),
+//           ListTile(
+//             leading: CircleAvatar(child: Text('2')),
+//             title: Text('Item Two'),
+//           ),
+//         ],
+//       ),
+//     ],
+//   ),
+// ),
 //       ),
 //     );
 //   }
