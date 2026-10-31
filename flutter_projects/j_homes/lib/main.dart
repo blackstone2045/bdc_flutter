@@ -19,7 +19,7 @@ class JHomesApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
         scaffoldBackgroundColor: const Color(0xFFA5C3C6),
-        fontFamily: 'Roboto',
+        fontFamily: 'onset',
       ),
       home: HomePage(),
     );
