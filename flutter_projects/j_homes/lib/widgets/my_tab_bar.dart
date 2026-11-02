@@ -3,6 +3,9 @@ import 'package:j_homes/screens/favourite_page.dart';
 import 'package:j_homes/screens/home_page.dart';
 import 'package:j_homes/screens/profile_page.dart';
 import 'package:j_homes/screens/search_page.dart';
+import 'package:j_homes/screens/settings_page.dart';
+import 'package:j_homes/widgets/custom_app_bar.dart';
+import 'package:j_homes/widgets/custom_drawer.dart';
 
 class MyTabBar extends StatefulWidget {
   const MyTabBar({super.key});
@@ -15,9 +18,10 @@ class _MyTabBarState extends State<MyTabBar>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   bool _isExpanded = false;
+
   @override
   void initState() {
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 5, vsync: this);
     tabController.addListener(() {
       setState(() {});
     });
@@ -33,80 +37,98 @@ class _MyTabBarState extends State<MyTabBar>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomDrawer(),
+      appBar: CustomAppBar(
+        title: tabController.index == 0
+            ? "Home"
+            : tabController.index == 1
+            ? "Favourite"
+            : tabController.index == 2
+            ? "Search"
+            : tabController.index == 3
+            ? "Profile"
+            : tabController.index == 4
+            ? "Settings"
+            : "",
+      ),
       body: GestureDetector(
-        onDoubleTap: () => setState(() => _isExpanded = !_isExpanded),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: Container(
-                width: double.infinity,
-                color: Colors.white,
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: TabBarView(
-                        controller: tabController,
+        onDoubleTap: () {
+          setState(() {
+            _isExpanded = true;
+            Future.delayed(Duration(microseconds: 500));
+            _isExpanded = false;
+          });
+        },
+        child: Flexible(
+          child: Container(
+            width: double.infinity,
+            color: Colors.white,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: TabBarView(
+                    controller: tabController,
+                    children: [
+                      HomePage(),
+                      FavoritesPage(),
+                      SearchPage(),
+                      ProfilePage(),
+                      SettingsPage(),
+                    ],
+                  ),
+                ),
+                // Positioned(
+                //   height: 20,
+
+                //   top: 400,
+                //   child: IconButton(
+                //     icon: Icon(
+                //       _isExpanded
+                //           ? Icons.arrow_back_ios
+                //           : Icons.arrow_forward_ios,
+
+                //       color: Colors.black,
+                //     ),
+                //     onPressed: () {
+                //       setState(() {
+                //         _isExpanded = !_isExpanded;
+                //       });
+                //     },
+                //   ),
+                // ),
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 300),
+                  left: _isExpanded ? 12 : -100,
+                  top: 250,
+                  child: Material(
+                    elevation: 8.0,
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 6.0,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          HomePage(),
-                          FavoritesPage(),
-                          SearchPage(),
-                          ProfilePage(),
+                          _buildVerticalTab(0, Icons.home, "Home"),
+                          const SizedBox(height: 12),
+                          _buildVerticalTab(1, Icons.favorite, "Favourite"),
+                          const SizedBox(height: 12),
+                          _buildVerticalTab(2, Icons.search, "Search"),
+                          const SizedBox(height: 12),
+                          _buildVerticalTab(3, Icons.person, "Profile"),
+                          const SizedBox(height: 12),
+                          _buildVerticalTab(4, Icons.settings, "Settings"),
                         ],
                       ),
                     ),
-                    // Positioned(
-                    //   height: 20,
-
-                    //   top: 400,
-                    //   child: IconButton(
-                    //     icon: Icon(
-                    //       _isExpanded
-                    //           ? Icons.arrow_back_ios
-                    //           : Icons.arrow_forward_ios,
-
-                    //       color: Colors.black,
-                    //     ),
-                    //     onPressed: () {
-                    //       setState(() {
-                    //         _isExpanded = !_isExpanded;
-                    //       });
-                    //     },
-                    //   ),
-                    // ),
-                    AnimatedPositioned(
-                      duration: const Duration(milliseconds: 300),
-                      left: _isExpanded ? 12 : -100,
-                      top: 300,
-                      child: Material(
-                        elevation: 8.0,
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                            horizontal: 6.0,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              _buildVerticalTab(0, Icons.home, "Home"),
-                              const SizedBox(height: 12),
-                              _buildVerticalTab(1, Icons.favorite, "Favourite"),
-                              const SizedBox(height: 12),
-                              _buildVerticalTab(2, Icons.search, "Search"),
-                              const SizedBox(height: 12),
-                              _buildVerticalTab(3, Icons.person, "Profile"),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -126,7 +148,7 @@ class _MyTabBarState extends State<MyTabBar>
             width: 80,
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
             decoration: BoxDecoration(
-              color: isSelected ? Colors.indigo.shade50 : Colors.transparent,
+              color: isSelected ? Colors.red.shade50 : Colors.transparent,
               borderRadius: BorderRadius.circular(12),
               border: isSelected
                   ? Border.all(color: Colors.blue.shade500, width: 1.5)

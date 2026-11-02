@@ -10,7 +10,7 @@ class FavoritesPage extends StatelessWidget {
     return Scaffold(
       drawer: CustomDrawer(),
       backgroundColor: Colors.purple,
-      appBar: CustomAppBar(title: "Fovorites"),
+      //appBar: CustomAppBar(title: "Fovorites"),
       body: Center(child: Text("This is FavoritesPage")),
     );
   }

@@ -10,7 +10,7 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       
       drawer: CustomDrawer(),
-      appBar: CustomAppBar(title: "Settings"),
+     // appBar: CustomAppBar(title: "Settings"),
       body: Center(child: Text("This is Settings")),
     );
   }

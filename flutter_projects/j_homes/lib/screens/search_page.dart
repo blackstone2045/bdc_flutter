@@ -10,7 +10,7 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       drawer: CustomDrawer(),
       backgroundColor: Colors.lightGreen,
-      appBar: CustomAppBar(title: "Search"),
+     // appBar: CustomAppBar(title: "Search"),
       body: Center(child: Text("This is SearchPage")),
     );
   }
