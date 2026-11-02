@@ -6,6 +6,8 @@ import 'package:j_homes/screens/profile_page.dart';
 import 'package:j_homes/screens/search_page.dart';
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }

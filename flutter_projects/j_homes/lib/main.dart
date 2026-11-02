@@ -22,7 +22,9 @@ class JHomesApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFA5C3C6),
         fontFamily: 'onset',
       ),
-      home: MyTabBar(),
+      home: MyTabBar(
+        
+      ),
     );
   }
 }
