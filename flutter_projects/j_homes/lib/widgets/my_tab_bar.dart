@@ -4,6 +4,7 @@ import 'package:j_homes/screens/home_page.dart';
 import 'package:j_homes/screens/profile_page.dart';
 import 'package:j_homes/screens/search_page.dart';
 import 'package:j_homes/screens/settings_page.dart';
+import 'package:j_homes/todo_app/todo_app.dart';
 import 'package:j_homes/widgets/custom_app_bar.dart';
 import 'package:j_homes/widgets/custom_drawer.dart';
 
@@ -18,6 +19,12 @@ class _MyTabBarState extends State<MyTabBar>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   bool _isExpanded = false;
+
+  Future<void> expandTabBar() async {
+    _isExpanded = true;
+    setState(() {});
+    await Future.delayed(Duration(seconds: 5));
+  }
 
   @override
   void initState() {
@@ -40,7 +47,7 @@ class _MyTabBarState extends State<MyTabBar>
       drawer: CustomDrawer(),
       appBar: CustomAppBar(
         title: tabController.index == 0
-            ? "Home"
+            ? "Todos"
             : tabController.index == 1
             ? "Favourite"
             : tabController.index == 2
@@ -52,12 +59,11 @@ class _MyTabBarState extends State<MyTabBar>
             : "",
       ),
       body: GestureDetector(
-        onDoubleTap: () {
-          setState(() {
-            _isExpanded = true;
-            Future.delayed(Duration(microseconds: 500));
-            _isExpanded = false;
-          });
+        onDoubleTap: () async {
+          await expandTabBar();
+
+          _isExpanded = false;
+          setState(() {});
         },
         child: Flexible(
           child: Container(
@@ -69,7 +75,7 @@ class _MyTabBarState extends State<MyTabBar>
                   child: TabBarView(
                     controller: tabController,
                     children: [
-                      HomePage(),
+                     TodoApp(),
                       FavoritesPage(),
                       SearchPage(),
                       ProfilePage(),

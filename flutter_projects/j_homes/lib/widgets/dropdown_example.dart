@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DropdownExample extends StatefulWidget {
+  const DropdownExample({super.key});
+
   @override
   _DropdownExampleState createState() => _DropdownExampleState();
 }
