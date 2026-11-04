@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:j_homes/screens/my_home_page.dart';
+import 'package:j_homes/animations/expand_card.dart';
+import 'package:j_homes/animations/hero_animation.dart';
+import 'package:j_homes/animations/puls_icon.dart';
 import 'package:j_homes/widgets/my_tab_bar.dart';
 
 void main() {
@@ -22,9 +24,7 @@ class JHomesApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFA5C3C6),
         fontFamily: 'onset',
       ),
-      home: MyTabBar(
-        
-      ),
+      home: HeroHomePage(),
     );
   }
 }
