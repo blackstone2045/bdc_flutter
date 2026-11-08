@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:j_homes/screens/my_home_page.dart';
-import 'package:j_homes/widgets/my_tab_bar.dart';
+import 'package:j_homes/apps_practice/music_player/music_player_screen.dart';
 
 void main() {
   runApp(const JHomesApp());
@@ -22,9 +21,7 @@ class JHomesApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFA5C3C6),
         fontFamily: 'onset',
       ),
-      home: MyTabBar(
-        
-      ),
+      home: MusicPlayerScreen(),
     );
   }
 }
