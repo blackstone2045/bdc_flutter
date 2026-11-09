@@ -55,11 +55,11 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               ),
               const SizedBox(height: 40),
 
-              // ---------- Album Art (Using Stack) ----------
+             
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  // Background glow effect
+                 
                   Container(
                     width: 280,
                     height: 280,
@@ -74,7 +74,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                       ],
                     ),
                   ),
-                  // Main Album Cover
+                 
                   Container(
                     width: 260,
                     height: 260,
@@ -99,7 +99,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               ),
               const SizedBox(height: 40),
 
-              // ---------- Song Title & Artist ----------
+              
               const Text(
                 "Midnight City",
                 style: TextStyle(
@@ -119,7 +119,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               ),
               const Spacer(),
 
-              // ---------- Slider & Time Row ----------
+              
               Column(
                 children: [
                   SliderTheme(
@@ -173,7 +173,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               ),
               const SizedBox(height: 20),
 
-              // ---------- Playback Controls (Row) ----------
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -187,7 +187,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                     iconSize: 42,
                     onPressed: () {},
                   ),
-                  // Main Play/Pause Button
+                 
                   Container(
                     decoration: const BoxDecoration(
                       color: Colors.purpleAccent,
@@ -227,7 +227,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
     );
   }
 
-  // Helper function to format seconds into MM:SS
+  
   String _formatTime(double seconds) {
     final int min = (seconds / 60).floor();
     final int sec = (seconds % 60).floor();

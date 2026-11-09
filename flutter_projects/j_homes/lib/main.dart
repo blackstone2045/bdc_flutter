@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:j_homes/apps_practice/instagram/instagram_home.dart';
 import 'package:j_homes/apps_practice/music_player/music_player_screen.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class JHomesApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFA5C3C6),
         fontFamily: 'onset',
       ),
-      home: MusicPlayerScreen(),
+      home: InstagramHome(),
     );
   }
 }
