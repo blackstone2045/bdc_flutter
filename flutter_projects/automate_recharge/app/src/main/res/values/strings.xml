@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">automate_recharge</string>
+    <string name="accessibility_service_description">Required for automatic USSD menu navigation</string>
+</resources>

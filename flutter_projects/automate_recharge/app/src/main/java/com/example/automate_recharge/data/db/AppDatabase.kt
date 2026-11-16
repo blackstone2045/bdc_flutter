@@ -1,9 +1,16 @@
 package com.example.automate_recharge.data.db
 
 import android.content.Context
-import androidx.room.*
-import com.yourcompany.ussdagent.data.model.SmsMessage
-import com.yourcompany.ussdagent.data.model.UssdTask
+import androidx.room.Dao
+import androidx.room.Database
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.automate_recharge.data.model.SmsMessage
+import com.example.automate_recharge.data.model.UssdTask
+
 
 @Dao
 interface UssdTaskDao {
