@@ -1,4 +1,5 @@
 import 'package:clean_architecture_demo/features/todos/presentation/pages/todo_page.dart';
+import 'package:clean_architecture_demo/features/users/presentation/pages/user_page.dart';
 import 'package:flutter/material.dart';
 import 'features/posts/presentation/pages/post_page.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: Colors.blue,
         useMaterial3: true,
       ),
-      home: const TodoPage(),
+      home: const UserPage(),
     );
   }
 }

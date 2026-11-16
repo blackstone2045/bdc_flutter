@@ -1,7 +1,8 @@
-import 'package:clean_architecture_new/features/todos/domain/entities/todo.dart';
+
+import 'package:clean_architecture_demo/features/todos/domain/entities/todo.dart';
 
 class TodoModel extends Todo {
-  TodoModel({
+  const TodoModel({
     required super.id,
     required super.userId,
     required super.title,
@@ -16,7 +17,13 @@ class TodoModel extends Todo {
       completed: json['completed'],
     );
   }
+
   Map<String, dynamic> toJson() {
-    return {'id': id, 'userId': userId, 'title': title, 'completed': completed};
+    return {
+      'id': id,
+      'userId': userId,
+      'title': title,
+      'body': completed,
+    };
   }
 }
