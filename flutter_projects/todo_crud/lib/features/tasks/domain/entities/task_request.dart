@@ -1,0 +1,11 @@
+class TaskRequest {
+  final String title;
+  final String description;
+  final String status;
+
+  const TaskRequest({
+    required this.title,
+    required this.description,
+    required this.status,
+  });
+}
