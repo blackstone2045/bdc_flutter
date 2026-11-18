@@ -1,10 +1,10 @@
+import 'package:clean_architecture_demo/features/todos/data/datasource/todo_remote_data_source.dart';
+import 'package:clean_architecture_demo/features/todos/domain/entities/todo.dart';
+import 'package:clean_architecture_demo/features/todos/domain/usecases/get_todos.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/network/dio_client.dart';
-import '../../data/datasource/todo_remote_data_source.dart';
 import '../../data/repositories/todo_repository_impl.dart';
-import '../../domain/entities/todo.dart';
-import '../../domain/usecases/get_todos.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -14,6 +14,7 @@ class TodoPage extends StatefulWidget {
 }
 
 class _TodoPageState extends State<TodoPage> {
+
   late final GetTodos getTodos;
 
   List<Todo> todos = [];
@@ -30,7 +31,8 @@ class _TodoPageState extends State<TodoPage> {
 
     final remoteDataSource = TodoRemoteDataSource(dio);
 
-    final repository = TodoRepositoryImpl(remoteDataSource);
+    final repository =
+    TodoRepositoryImpl(remoteDataSource);
 
     getTodos = GetTodos(repository);
 
@@ -65,35 +67,34 @@ class _TodoPageState extends State<TodoPage> {
       }
     }
   }
-
   @override
   Widget build(BuildContext context) {
+
+    
+
     return Scaffold(
-      appBar: AppBar(title: Text("Todos")),
-      body: ListView.builder(
-        itemCount: todos.length,
-        itemBuilder: (_, index) {
-          final todo = todos[index];
-          bool isCompleted = todo.completed;
-          return ListTile(
-            leading: Checkbox(
-              value: isCompleted,
-              onChanged: (value) {
-                setState(() {
-                  isCompleted != isCompleted;
-                  print(isCompleted);
-                });
-              },
-            ),
-            title: Text(
-              todo.title,
-              style: TextStyle(
-                color: isCompleted ? Colors.green : Colors.black,
-              ),
-            ),
-          );
-        },
+      appBar: AppBar(
+        title: Text("Todos"),
       ),
+      body: ListView.builder(
+
+          itemCount: todos.length,
+          itemBuilder: (_,index){
+            final todo = todos[index];
+            bool isCompleted = todo.completed;
+            return ListTile(
+              leading: Checkbox(
+
+                  value: isCompleted, onChanged: (value){
+                setState(() {
+                  isCompleted != isCompleted ;
+                  print(isCompleted);
+
+                });
+              }),
+              title: Text(todo.title,style: TextStyle(color: isCompleted?Colors.green:Colors.black),),
+            );
+          }),
     );
   }
 }
