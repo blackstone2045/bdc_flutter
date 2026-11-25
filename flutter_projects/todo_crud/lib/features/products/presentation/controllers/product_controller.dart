@@ -73,6 +73,7 @@ class ProductController extends GetxController {
       final result = await getProduct(page: currentPage, limit: limit);
 
       products.assignAll(result.products);
+      foundProducts.value = products;
 
       currentPage = result.page;
 
@@ -99,7 +100,7 @@ class ProductController extends GetxController {
       final result = await getProduct(page: nextPage, limit: limit);
 
       products.addAll(result.products);
-
+      foundProducts.value = products;
       currentPage = result.page;
 
       totalPage = result.totalPage;
@@ -181,7 +182,7 @@ class ProductController extends GetxController {
       await deleteProduct(id);
 
       products.removeWhere((product) => product.id == id);
-
+      foundProducts.value = products;
       Get.snackbar('Success', 'Product deleted successfully');
 
       // Reload current page if it became empty.

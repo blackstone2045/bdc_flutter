@@ -112,7 +112,8 @@ class ProductPage extends GetView<ProductController> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (controller.errorMessage.isNotEmpty && controller.products.isEmpty) {
+        if (controller.errorMessage.isNotEmpty &&
+            controller.foundProducts.isEmpty) {
           return Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -134,8 +135,34 @@ class ProductPage extends GetView<ProductController> {
           );
         }
 
-        if (controller.products.isEmpty) {
-          return const Center(child: Text('No products available'));
+        if (controller.foundProducts.isEmpty) {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  onChanged: (value) {
+                    controller.searchProducts(value);
+                    // if (controller.foundProducts.isEmpty) {
+                    //   controller.fetchProducts(refresh: true);
+                    // }
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'Search Product..',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              const Center(child: Text('No products available')),
+              ElevatedButton(
+                onPressed: () {
+                  controller.fetchProducts(refresh: true);
+                },
+
+                child: const Text('Retry'),
+              ),
+            ],
+          );
         }
 
         return RefreshIndicator(
@@ -150,6 +177,9 @@ class ProductPage extends GetView<ProductController> {
                 child: TextField(
                   onChanged: (value) {
                     controller.searchProducts(value);
+                    // if (controller.foundProducts.isEmpty) {
+                    //   controller.fetchProducts(refresh: true);
+                    // }
                   },
                   decoration: const InputDecoration(
                     labelText: 'Search Product..',
