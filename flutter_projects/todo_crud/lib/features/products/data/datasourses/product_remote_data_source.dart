@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
-import 'package:todo_crud/features/products/domain/entites/product.dart';
-import 'package:todo_crud/features/products/domain/entites/product_page.dart';
 
 import '../../../../core/constants/api_constants.dart';
 import '../../../../core/errors/api_exception.dart';
+import '../../domain/entites/product_page.dart';
+import '../../domain/entites/product_request.dart';
 import '../models/product_model.dart';
 
 class ProductRemoteDataSource {
   final Dio dio;
 
-  ProductRemoteDataSource.Product(this.dio);
+  ProductRemoteDataSource(this.dio);
 
-  // GET ALL TASKS
+  // GET ALL PRODUCTS
 
   Future<ProductPage> getProducts({
     required int page,
@@ -30,26 +30,24 @@ class ProductRemoteDataSource {
       final meta = data['meta'];
 
       return ProductPage(
-        products: productList
-            .map(
-              (json) => ProductModel.fromJson(Map<String, dynamic>.from(json)),
-            )
-            .toList(),
-        page: meta['page'],
-        limit: meta['limit'],
-        total: meta['total'],
-        totalPage: meta['totalPage'],
+        products: productList.map((json) {
+          return ProductModel.fromJson(Map<String, dynamic>.from(json));
+        }).toList(),
+        page: (meta['page'] as num).toInt(),
+        limit: (meta['limit'] as num).toInt(),
+        total: (meta['total'] as num).toInt(),
+        totalPage: (meta['totalPage'] as num).toInt(),
       );
     } on DioException catch (e) {
       throw ApiException.fromDio(e);
     }
   }
 
-  // GET TASK BY ID
+  // GET PRODUCT BY ID
 
-  Future<ProductModel> getTaskById(String id) async {
+  Future<ProductModel> getProductById(String id) async {
     try {
-      final response = await dio.get('${ApiConstants.tasks}/$id');
+      final response = await dio.get('${ApiConstants.products}/$id');
 
       return ProductModel.fromJson(
         Map<String, dynamic>.from(response.data['data']),
@@ -59,17 +57,31 @@ class ProductRemoteDataSource {
     }
   }
 
-  // CREATE TASK
+  // CREATE PRODUCT
 
-  Future<ProductModel> createTask(TaskRequest request) async {
+  Future<ProductModel> createProduct(ProductRequest request) async {
     try {
+      final imagePath = request.imagePath;
+
+      if (imagePath == null || imagePath.isEmpty) {
+        throw ApiException('Product image is required.');
+      }
+
+      final formData = FormData.fromMap({
+        'name': request.name!,
+        'price': request.price.toString(),
+        'stock': request.stock.toString(),
+
+        'image': await MultipartFile.fromFile(
+          imagePath,
+          filename: imagePath.split('/').last,
+        ),
+      });
+
       final response = await dio.post(
-        ApiConstants.tasks,
-        data: {
-          'title': request.title,
-          'description': request.description,
-          'status': request.status,
-        },
+        ApiConstants.products,
+        data: formData,
+        options: Options(contentType: Headers.multipartFormDataContentType),
       );
 
       return ProductModel.fromJson(
@@ -80,17 +92,39 @@ class ProductRemoteDataSource {
     }
   }
 
-  // UPDATE TASK
+  // UPDATE PRODUCT
 
-  Future<ProductModel> updateTask(String id, TaskRequest request) async {
+  Future<ProductModel> updateProduct(String id, ProductRequest request) async {
     try {
+      final Map<String, dynamic> fields = {};
+
+      if (request.name != null) {
+        fields['name'] = request.name;
+      }
+
+      if (request.price != null) {
+        fields['price'] = request.price.toString();
+      }
+
+      if (request.stock != null) {
+        fields['stock'] = request.stock.toString();
+      }
+
+      if (request.imagePath != null && request.imagePath!.isNotEmpty) {
+        final imagePath = request.imagePath!;
+
+        fields['image'] = await MultipartFile.fromFile(
+          imagePath,
+          filename: imagePath.split('/').last,
+        );
+      }
+
+      final formData = FormData.fromMap(fields);
+
       final response = await dio.patch(
-        '${ApiConstants.tasks}/$id',
-        data: {
-          'title': request.title,
-          'description': request.description,
-          'status': request.status,
-        },
+        '${ApiConstants.products}/$id',
+        data: formData,
+        options: Options(contentType: Headers.multipartFormDataContentType),
       );
 
       return ProductModel.fromJson(
@@ -101,11 +135,11 @@ class ProductRemoteDataSource {
     }
   }
 
-  // DELETE TASK
+  // DELETE PRODUCT
 
-  Future<ProductModel> deleteTask(String id) async {
+  Future<ProductModel> deleteProduct(String id) async {
     try {
-      final response = await dio.delete('${ApiConstants.tasks}/$id');
+      final response = await dio.delete('${ApiConstants.products}/$id');
 
       return ProductModel.fromJson(
         Map<String, dynamic>.from(response.data['data']),

@@ -8,6 +8,6 @@ class GetProductById {
   GetProductById(this.repository);
 
   Future<Product> call(String id) {
-    return repository.getProductId(id);
+    return repository.getProductById(id);
   }
 }
