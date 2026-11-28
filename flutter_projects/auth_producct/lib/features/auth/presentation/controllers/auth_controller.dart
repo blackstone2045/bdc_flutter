@@ -33,11 +33,13 @@ class AuthController extends GetxController {
   final isLoading = false.obs;
   final isAuthenticated = false.obs;
   final errorMessage = ''.obs;
-  final rememberMe = true.obs;
+  final rememberMe = false.obs;
   final savedEmail = ''.obs;
   @override
   void onInit() {
     super.onInit();
+
+    // loadSavedCredentials();
     checkAuthentication();
   }
 
@@ -145,15 +147,26 @@ class AuthController extends GetxController {
     }
   }
 
-  void loadSavedCredentials() {
-    savedEmail.value = tokenStorage.getEmail() ?? '';
-
-    rememberMe.value = savedEmail.value.isNotEmpty;
-  }
+  // void loadSavedCredentials() {
+  //   savedEmail.value = tokenStorage.getEmail() ?? '';
+  //
+  //   rememberMe.value = savedEmail.value.isNotEmpty;
+  // }
 
   String _getErrorMessage(Object error) {
     final message = error.toString();
 
     return message.replaceFirst('Exception: ', '');
+  }
+
+  @override
+  void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    emailFocus.dispose();
+    passwordFocus.dispose();
+
+    super.onClose();
   }
 }

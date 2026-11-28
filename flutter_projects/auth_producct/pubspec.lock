@@ -360,6 +360,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+  pinput:
+    dependency: "direct main"
+    description:
+      name: pinput
+      sha256: d446a2a0a4b9f4d2f9c4a7e0aa1e5995d4ee09dad1d27c161953ef70b7a54fa4
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   platform:
     dependency: transitive
     description:
@@ -397,6 +405,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  smart_auth:
+    dependency: "direct main"
+    description:
+      name: smart_auth
+      sha256: "6332eec5f1093213b7c4d4c320a50e7873a6d6fc22abeaf39562651e957944e8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
   source_span:
     dependency: transitive
     description:
